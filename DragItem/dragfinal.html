@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DragItem</title>
+    <style>
+        body{
+            font-family:calibri;
+        }
+
+        #choice1    
+        {
+            border:1px solid black;
+            width:250px;
+            height:400px;
+            background-color:#fafafa;
+            text-align: center;
+            padding: 10px;
+        }
+
+        section{
+            display:flex;
+            justify-content: space-around;
+            margin-top:250px;        
+        }
+
+        p{
+            text-align:center;
+            border:1px solid black;
+            margin:20px;
+            padding:10px; 
+            background-color:rgb(241, 17, 17);  
+            color:#fff;  
+        }
+
+    </style>
+</head>
+
+
+<body>
+    <section> 
+        <div id="choice1">
+            <p draggable="true">oppo</p>
+            <p draggable="true">vivo</p>
+            <p draggable="true">oneplus</p>
+            <p draggable="true">samsung</p>
+            <p draggable="true">Apple</p>
+            <p draggable="true">Lenovo</p>
+        </div>
+        <div id="choice1">Excellent</div>
+        <div id="choice1">Good</div>
+        <div id="choice1">Poor</div>
+    </section>
+
+    <script>
+        // document.addEventListener("click",()=>alert("Hello world"));
+        var p = document.getElementsByTagName('p');
+        var dragItem = null;
+        for(i of p)
+        {
+            i.addEventListener('dragstart',dragStart);
+            i.addEventListener('dragend',dragEnd);
+        }
+        
+        function dragStart()
+        {
+            dragItem = this;
+            setTimeout(()=>this.style.display="none",0);  
+        }
+
+        function dragEnd()
+        {
+            setTimeout(()=>this.style.display="block",0);  
+            dragItem = null;
+        }
+
+        for(j of choice1){
+            j.addEventListener('dragover',dragOver);
+            j.addEventListener('dragenter',dragEnter);
+            j.addEventListener('dragleave',dragLeave);
+            j.addEventListener('drop',drop);
+        }
+
+        function drop()
+        {
+            this.append(dragItem);
+        }
+        function dragOver(e)
+        {
+            e.preventDefault();
+            this.style.border="2px dotted cyan";
+        }
+        function dragEnter(e)
+        {
+            e.preventDefault();
+        }
+        function dragLeave()
+        {
+            this.style.border="2px dotted red";
+        }
+        
+        
+    </script>
+</body>
+</html>
